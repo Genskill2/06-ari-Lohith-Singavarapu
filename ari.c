@@ -1,65 +1,62 @@
 #include <stdio.h>
-#include <assert.h>
-#include <string.h>
 #include <cs50.h>
+#include <string.h>
 #include <ctype.h>
 
-typedef struct {
-   int score;
-   string age;
-   string gradelevel;
 
-} Grade;
-
-
-string ari(string s){
-
-  int characters = 0, words = 0, sente = 0;
-  for(int i = 0; i < strlen(s); i++){
-    if( isalnum(s[i]) ){
-     characters += 1;
-     }
-     if(s[i] == ' '){
-     words += 1;
-     }
-     if(s[i] == '.' || s[i] == '?' || s[i] == '!' ){
-     sente += 1;
-     }
-    
-  }
- 
- 
-  float a = 4.71 * characters/words  + 0.5 * words/sente - 21.43;
-  float b = a - (int)a;
-    if ( b < 1 && b > 0 ){
-       a = (int)a+1;
-       }else{
-       a = (int)a;
-       }                             
- 
- Grade g[14] = {
-         {.score = 1 , .age = "5 to 6"   , .gradelevel = "Kindergarten"} ,
-       {.score = 2 , .age = "6 to 7"   , .gradelevel = "First/Second Grade"}, 
-            {.score = 3 , .age = "7 to 9"   , .gradelevel = "Third Grade"} ,
-            {.score = 4 , .age = "9 to 10"  ,.gradelevel = "Fourth Grade"} ,
-            {.score = 5 , .age = "10 to 11" , .gradelevel = "Fifth Grade"} ,
-            {.score = 6 , .age = "11 to 12" , .gradelevel = "Sixth Grade"} ,
-           {.score = 7  , .age = "12 to 13" , .gradelevel = "Seventh Grade"}, 
-            {.score = 8  , .age = "12 to 13" , .gradelevel = "Eighth Grade"}, 
-            {.score = 9  , .age = "12 to 13" , .gradelevel = "Ninth Grade"} ,
-            {.score = 10 , .age = "12 to 13" , .gradelevel = "Tenth Grade"} ,
-          {.score = 11 , .age = "12 to 13" , .gradelevel = "Eleventh Grade"}, 
-           {.score = 12 , .age = "12 to 13" , .gradelevel = "Twelfth Grade"}, 
-         {.score = 13 , .age = "12 to 13" , .gradelevel = "College student"}, 
-            {.score = 14 , .age = "12 to 13" , .gradelevel = "Professor"} 
-                                                                              
-    } ;
- 
- for(int i = 0; i<14 ; i++){
-   if (a == g[i].score){
-    return g[i].gradelevel;
+string ari(string S)
+{
+    int c=0,w=0,s=0;
+    for(int i=0 ; i< strlen(S); i++){
+    if(isalnum(S[i])){
+    c++;
+    }
+    else if (S[i]==' ')
+    {
+    w++;
+    }
+    else if (S[i]=='.' || S[i]=='?' || S[i]=='!')
+    {
+    s++;
+    }
    }
- 
+    float score;
+    int ari_s;
+    score = 4.71*((float)c/(float)w)+(0.5*((float)w/(float)s))-21.43;
+    if((int)(score+0.5)>(int)score)
+    ari_s=(int)(score+0.5);
+    else
+    ari_s=(int)(score)+1;
+    switch(ari_s)
+    {
+case 1:return "Kindergarten";
+       break;
+case 2:return "First/Second Grade";
+       break; 
+case 3:return "Third Grade";
+       break;
+case 4:return "Fourth Grade";
+       break;
+case 5:return "Fifth Grade";
+       break;
+case 6:return "Sixth Grade";
+       break;
+case 7:return "Seventh Grade";
+       break;
+case 8: return "Eighth Grade";
+        break;
+case 9:return "Ninth Grade";
+       break;
+case 10:return "Tenth Grade";
+        break;
+case 11:return "Eleventh Grade";
+        break;
+case 12:return "Twelfth grade";
+        break;
+case 13:return "College student";
+        break;
+case 14:return "Professor";
+        break;
+default:break; 
  }
- 
  }
